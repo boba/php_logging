@@ -1,0 +1,36 @@
+{
+    "config": {
+        "secure-http": false,
+        "platform": {
+            "php": "7.2"
+        },
+        "process-timeout": 0
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        { "packagist": false }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "monolog/monolog": "~1.23.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "~3.2.0",
+        "phpstan/phpstan": "~0.10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/App",
+            "Tests\\": "test/Tests"
+        }
+    },
+    "scripts": {
+        "phpcs": "phpcs --standard=PSR1,PSR2,PEAR --warning-severity=0 --report=full src",
+        "phpstan": "phpstan analyze --no-progress --level=max",
+        "web": "@php -S localhost:8888 -t public",
+        "lint": [ "@phpcs", "@phpstan"]
+    }
+}
