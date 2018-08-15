@@ -17,9 +17,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $logger = new Logger('default');
 
-/**
- * Create a rotating file stream handler
- */
+// Create a rotating file stream handler
 try {
     $stream = new \Monolog\Handler\RotatingFileHandler(__DIR__ . '/../../logs/example.log', 2, Logger::INFO);
     $logger->pushHandler($stream);

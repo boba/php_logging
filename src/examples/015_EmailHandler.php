@@ -30,9 +30,7 @@ ini_set('SMTP', $config['smtp_server']);
 ini_set('smtp_port', $config['smtp_port']);
 ini_set('sendmail_from', $config['send_from']);
 
-/**
- * Create a handler to send email messages
- */
+// create a handler to send email messages
 $handler = new \Monolog\Handler\NativeMailerHandler($config['send_to'], $config['subject'], $config['send_from'], Logger::EMERGENCY);
 
 $emailLogger = new Logger('email');

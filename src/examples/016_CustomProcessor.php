@@ -16,10 +16,6 @@ use App\User;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-/**
- * Customize the log format
- */
-
 // create a logger
 $logger = new Logger('default');
 

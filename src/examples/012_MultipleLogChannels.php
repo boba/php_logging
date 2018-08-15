@@ -16,9 +16,7 @@ use App\User;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-/**
- * Create multiple log channels to differentiate areas of interest
- */
+// Create multiple log channels to differentiate areas of interest
 $logger = new Logger('default');
 $securityLogger = new Logger('security');
 
