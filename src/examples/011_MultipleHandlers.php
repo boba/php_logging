@@ -20,7 +20,7 @@ $logger = new Logger('default');
 /**
  * Create some handlers
  */
-$console = new \Monolog\Handler\ErrorLogHandler(\Monolog\Handler\ErrorLogHandler::OPERATING_SYSTEM, Logger::DEBUG);
+$console = new \Monolog\Handler\StreamHandler('php://stderr', Logger::DEBUG);
 $logger->pushHandler($console);
 
 try {
