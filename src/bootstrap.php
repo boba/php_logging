@@ -12,44 +12,24 @@
  */
 
 use Monolog\Logger;
-use App\User;
+use Monolog\Processor\WebProcessor;
+use App\Log\UserSessionProcessor;
+use App\Log\CustomFormatRotatingFileHandler;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-
-/**
- * Customize the log format
- */
 
 // create a logger
 $logger = new Logger('default');
 
-$webProcessor = new \Monolog\Processor\WebProcessor();
-$logger->pushProcessor($webProcessor);
+// add web request info to log record
+$logger->pushProcessor(new WebProcessor());
 
-// add username to log record (if available)
-$logger->pushProcessor(
-    function ($record) {
-        if (isset($_SESSION['user'])) {
-            $record['extra']['username'] = $_SESSION['user']->getUsername();
-        } else {
-            $record['extra']['username'] = 'anonymous';
-        }
-        return $record;
-    }
-);
+// add user session to log record
+$logger->pushProcessor(new UserSessionProcessor());
 
-// customize the log format
-$output = "[%datetime%] [%channel%] %level_name%: [%extra.username%] %message% %context% %extra%\n";
-$dateFormat = "Y-m-d H:i:s";
-$formatter = new \Monolog\Formatter\LineFormatter($output, $dateFormat);
-
-// create a stream to a log file
 try {
-    $stream = new \Monolog\Handler\StreamHandler(__DIR__ . '/../logs/app.log', Logger::DEBUG);
-    $stream->setFormatter($formatter);
-
-    // add the stream to the log
-    $logger->pushHandler($stream);
+    // create a stream to a log file with a customer format for this application
+    $logger->pushHandler(new CustomFormatRotatingFileHandler(__DIR__ . '/../logs/app.log',  2, Logger::DEBUG));
 } catch (Exception $e) {
     // handle the case where the specified directory is not buildable or the stream is not a resource or string
 }

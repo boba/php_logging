@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
  * Customize the log format
  */
 $output = "[%datetime%] [%channel%] %level_name%: %message% %context% %extra%\n";
-$dateFormat = "Y-m-d H:i:s";
+$dateFormat = "Y-m-d H:i:s A";
 $formatter = new \Monolog\Formatter\LineFormatter($output, $dateFormat);
 
 $logger = new Logger('default');

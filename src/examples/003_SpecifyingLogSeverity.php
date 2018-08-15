@@ -20,7 +20,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
  * Configure the log only show entries that are severity ERROR or worse
  */
 $logger = new Logger('default');
-$logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::ERROR));
+$logger->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', Logger::ERROR));
 
 /**
  * PSR-3 defines LoggerInterface, which includes a function for each log severity
