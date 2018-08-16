@@ -17,9 +17,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $logger = new Logger('default');
 
-/**
- * Create some handlers
- */
+// Create some handlers
 $console = new \Monolog\Handler\StreamHandler('php://stderr', Logger::DEBUG);
 $logger->pushHandler($console);
 
